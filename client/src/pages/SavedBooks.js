@@ -10,8 +10,8 @@ import { REMOVE_BOOK } from '../utils/mutations';
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
+  const userData = data?.me || [];
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
-  const userData = data?.me || {};
 
   //removing the useEffect and using the useQuery instead
   const handleDeleteBook = async (bookId) => {
@@ -36,6 +36,7 @@ const SavedBooks = () => {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
+
 
   return (
     <>
