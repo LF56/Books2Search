@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
@@ -12,6 +12,7 @@ const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || [];
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
+  
 
   //removing the useEffect and using the useQuery instead
   const handleDeleteBook = async (bookId) => {
@@ -36,7 +37,6 @@ const SavedBooks = () => {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
-
 
   return (
     <>
