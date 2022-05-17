@@ -49,19 +49,19 @@ const resolvers = {
 
       throw new AuthenticationError('You need to be logged in to save books.');
     },
-    // addReaction: async (parent, { thoughtId, reactionBody }, context) => {
-    //   if (context.user) {
-    //     const updatedThought = await Thought.findOneAndUpdate(
-    //       { _id: thoughtId },
-    //       { $push: { reactions: { reactionBody, username: context.user.username } } },
-    //       { new: true, runValidators: true }
-    //     );
+    removeBook: async (parent, {bookId}, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user.__id },
+          { $pull: { savedBooks: { bookId: bookId} } },
+          { new: true, runValidators: true }
+        );
 
-    //     return updatedThought;
-    //   }
+        return updatedUser;
+      }
 
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+      throw new AuthenticationError('You need to be logged in to remove books!');
+    },
   }
 };
 
